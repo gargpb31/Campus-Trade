@@ -1,4 +1,4 @@
-# Campus-Bazzar
+# Campus-Bazar
 About :
 To create a secure and trustworthy platform for college students to connect and trade within their campus community.
 
