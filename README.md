@@ -17,8 +17,8 @@
 
 ## 📂 Technologies Used  
 - **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** Node.js / Firebase (for authentication & database)  
-- **Database:** Firestore / MySQL (optional)  
+- **Backend:** Node.js 
+- **Database:**  MySQL  
 
 ## 📌 Future Enhancements  
 🔹 Implement **real-time chat** for buyer-seller interaction  
