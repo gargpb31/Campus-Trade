@@ -1,7 +1,7 @@
-# 🏪 Campus Bazaar - A Student Marketplace  
+# 🏪 Campus Trade - A Student Marketplace  
 
 ## 📌 Overview  
-**Campus OLX** is a **peer-to-peer marketplace** designed specifically for students to **buy, sell, and exchange** items like books, gadgets, and accessories within their campus community. It provides a **secure and easy-to-use** platform for students to trade items without the hassle of external platforms.  
+**Campus Trade** is a **peer-to-peer marketplace** designed specifically for students to **buy, sell, and exchange** items like books, gadgets, and accessories within their campus community. It provides a **secure and easy-to-use** platform for students to trade items without the hassle of external platforms.  
 
 ## 🔧 Features  
 ✅ **Buy & Sell Used Items** – List and browse second-hand products  
