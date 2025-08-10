@@ -1,11 +1,9 @@
-
-
 import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
 import path from "path";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import pg from "pg";
 import nodemailer from "nodemailer";
 import session from "express-session";
@@ -28,26 +26,27 @@ db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
- app.use(express.static("public"));
+app.use(express.static("public"));
 //app.use("/uploads", express.static("public/uploads"));
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: "public/uploads/",
   filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname)); // Save with unique timestamp filename
-  }
+    cb(null, Date.now() + path.extname(file.originalname)); // Save with unique timestamp filename
+  },
 });
 const upload = multer({ storage: storage });
-const maill="";
+const maill = "";
 
-
-app.use(session({
-  secret: "your_secret_key",
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 600000 } // 10-minute expiry
-}));
+app.use(
+  session({
+    secret: "your_secret_key",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 600000 }, // 10-minute expiry
+  })
+);
 
 app.set("view engine", "ejs");
 
@@ -55,11 +54,11 @@ app.set("view engine", "ejs");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-     user: "collegebazaar4@gmail.com",
-    pass: "gnnqubmaxclpamla"
+    user: "collegebazaar4@gmail.com",
+    pass: "gnnqubmaxclpamla",
     // user: "shraddhasri743@gmail.com",
     // pass: "twbyzemqisnvyvri"
-  }
+  },
 });
 
 // Function to generate a random 6-digit OTP
@@ -70,15 +69,17 @@ function generateOTP() {
 // Middleware to check if the user is an admin
 function isAdmin(req, res, next) {
   if (req.session.userEmail) {
-    db.query("SELECT role FROM userinfo WHERE email = $1", [req.session.userEmail])
-      .then(result => {
+    db.query("SELECT role FROM userinfo WHERE email = $1", [
+      req.session.userEmail,
+    ])
+      .then((result) => {
         if (result.rows[0].role === "admin") {
           next();
         } else {
           res.status(403).send("Access denied");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error checking admin role:", err);
         res.status(500).send("Server error");
       });
@@ -101,7 +102,9 @@ app.get("/admin/users", isAdmin, async (req, res) => {
 // Route to view all products
 app.get("/admin/products", isAdmin, async (req, res) => {
   try {
-    const postsResult = await db.query("SELECT * FROM posts ORDER BY created_at DESC");
+    const postsResult = await db.query(
+      "SELECT * FROM posts ORDER BY created_at DESC"
+    );
     const posts = postsResult.rows;
     res.render("adminProducts.ejs", { posts });
   } catch (err) {
@@ -122,7 +125,9 @@ app.post("/admin/delete-user/:id", isAdmin, async (req, res) => {
 app.post("/admin/delete-product/:id", isAdmin, async (req, res) => {
   const { id } = req.params;
   try {
-    const postResult = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    const postResult = await db.query("SELECT * FROM posts WHERE id = $1", [
+      id,
+    ]);
     const post = postResult.rows[0];
     if (post && fs.existsSync(path.join(__dirname, "public", post.image_url))) {
       fs.unlinkSync(path.join(__dirname, "public", post.image_url)); // Delete the image file
@@ -164,45 +169,58 @@ app.post("/register", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
 
-  
-
   try {
-    const checkResult = await db.query("SELECT * FROM userinfo WHERE email = $1", [email]);
+    const checkResult = await db.query(
+      "SELECT * FROM userinfo WHERE email = $1",
+      [email]
+    );
     if (checkResult.rows.length > 0) {
       res.send("Email already exists. Try logging in.");
     } else {
-      await db.query("INSERT INTO userinfo (email, password) VALUES ($1, $2)", [email, password]);
+      await db.query("INSERT INTO userinfo (email, password) VALUES ($1, $2)", [
+        email,
+        password,
+      ]);
       req.session.userEmail = email;
-      const postsResult = await db.query("SELECT * FROM posts ORDER BY created_at DESC");
-        const posts = postsResult.rows;
-        const userRole='user';
-      res.render("pro.ejs",{posts,userRole});
+      const postsResult = await db.query(
+        "SELECT * FROM posts ORDER BY created_at DESC"
+      );
+      const posts = postsResult.rows;
+      const userRole = "user";
+      const userEmail = email;
+      res.render("pro.ejs", { posts, userRole, userEmail });
     }
   } catch (err) {
     console.log(err);
+    res.status(500).send("Error during registration");
   }
 });
-
 
 // Login Route
 app.post("/login", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
-  //maill=email;
 
   try {
-
-    const result = await db.query("SELECT * FROM userinfo WHERE email = $1", [email]);
+    const result = await db.query("SELECT * FROM userinfo WHERE email = $1", [
+      email,
+    ]);
     if (result.rows.length > 0) {
       const user = result.rows[0];
       if (password === user.password) {
         req.session.userEmail = email; // Store user_id in session
-        
-        const userRoleResult = await db.query("SELECT role FROM userinfo WHERE email = $1", [req.session.userEmail]);
-        const userRole = userRoleResult.rows[0]?.role;
-        const postsResult = await db.query("SELECT * FROM posts ORDER BY created_at DESC");
+
+        const userRoleResult = await db.query(
+          "SELECT role FROM userinfo WHERE email = $1",
+          [req.session.userEmail]
+        );
+        const userRole = userRoleResult.rows[0]?.role || "user";
+        const postsResult = await db.query(
+          "SELECT * FROM posts ORDER BY created_at DESC"
+        );
         const posts = postsResult.rows;
-        res.render("pro.ejs", { posts ,userRole});
+        const userEmail = email;
+        res.render("pro.ejs", { posts, userRole, userEmail });
       } else {
         res.render("login.ejs", {
           message: "Your password is incorrect. Please try again.",
@@ -213,9 +231,9 @@ app.post("/login", async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    res.status(500).send("Error during login");
   }
 });
-
 
 // Forget Password Route
 app.get("/forget-password", (req, res) => {
@@ -224,9 +242,9 @@ app.get("/forget-password", (req, res) => {
 
 // Send OTP
 app.post("/send-otp", async (req, res) => {
-  const email = req.body.email;  // Email entered by the user
-  const otp = generateOTP();  // Generate a random 6-digit OTP
-  
+  const email = req.body.email; // Email entered by the user
+  const otp = generateOTP(); // Generate a random 6-digit OTP
+
   // Store email and OTP in session
   req.session.email = email;
   req.session.otp = otp;
@@ -236,7 +254,7 @@ app.post("/send-otp", async (req, res) => {
     from: "shraddhasri743@gmail.com", // Replace with your email
     to: email,
     subject: "Your OTP for Password Reset",
-    text: `Your OTP is: ${otp}`
+    text: `Your OTP is: ${otp}`,
   };
 
   try {
@@ -249,14 +267,16 @@ app.post("/send-otp", async (req, res) => {
   }
 });
 
-
 // Verify OTP
 app.post("/verify-otp", (req, res) => {
   const { otp } = req.body;
 
   if (req.session.otp === otp) {
     req.session.otp = null;
-    res.json({ success: true, message: "OTP verified. Proceed to reset password." });
+    res.json({
+      success: true,
+      message: "OTP verified. Proceed to reset password.",
+    });
   } else {
     res.json({ success: false, message: "Incorrect OTP. Try again." });
   }
@@ -268,29 +288,38 @@ app.post("/reset-password", async (req, res) => {
   const email = req.session.email;
 
   try {
-    await db.query("UPDATE userinfo SET password = $1 WHERE email = $2", [newPassword, email]);
+    await db.query("UPDATE userinfo SET password = $1 WHERE email = $2", [
+      newPassword,
+      email,
+    ]);
     req.session.destroy();
     res.render("home.ejs");
     // res.json({ success: true, message: "Password successfully reset." });
   } catch (err) {
     console.log(err);
-    res.json({ success: false, message: "Error resetting password. Try again." });
+    res.json({
+      success: false,
+      message: "Error resetting password. Try again.",
+    });
   }
 });
-
 
 // Get products page
 
 // Route to get all posts and render the index page
 app.get("/pro", async (req, res) => {
-  const userRole='user';
+  const userRole = req.session.userEmail ? "user" : "guest";
+  const userEmail = req.session.userEmail || "";
+
   try {
-      const result = await db.query("SELECT * FROM posts ORDER BY created_at DESC");
-      const posts = result.rows;
-      res.render("pro.ejs", { posts,userRole });
+    const result = await db.query(
+      "SELECT * FROM posts ORDER BY created_at DESC"
+    );
+    const posts = result.rows;
+    res.render("pro.ejs", { posts, userRole, userEmail });
   } catch (err) {
-      console.error("Error fetching posts:", err);
-      res.status(500).send("Error fetching posts");
+    console.error("Error fetching posts:", err);
+    res.status(500).send("Error fetching posts");
   }
 });
 
@@ -345,29 +374,29 @@ app.get("/payment/:id", async (req, res) => {
 app.get("/edit/:id", async (req, res) => {
   const { id } = req.params;
   const userEmail = req.session.userEmail; // Get the logged-in user's email
-  
+
   try {
-      const result = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
-      const post = result.rows[0];
- console.log("Post ID:", id); // Log to check the post ID
- console.log("Post Data:", result.rows); 
-      if (post) {
-        if (post.user_email === userEmail) { // Check if the post belongs to the logged-in user
-          res.render("editPost.ejs", { post });
-        } else {
-          res.status(403).send("You can only edit your own posts");
-        }
+    const result = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    const post = result.rows[0];
+    console.log("Post ID:", id); // Log to check the post ID
+    console.log("Post Data:", result.rows);
+    if (post) {
+      if (post.user_email === userEmail) {
+        // Check if the post belongs to the logged-in user
+        res.render("editPost.ejs", { post });
       } else {
-          res.status(404).send("Post not found");
+        res.status(403).send("You can only edit your own posts");
       }
+    } else {
+      res.status(404).send("Post not found");
+    }
   } catch (err) {
-      console.error("Error fetching post:", err);
-      res.status(500).send("Error fetching post");
+    console.error("Error fetching post:", err);
+    res.status(500).send("Error fetching post");
   }
 });
 
 // Route to handle updating a post with a new image if provided
-
 
 app.post("/edit/:id", upload.single("image"), async (req, res) => {
   const { id } = req.params;
@@ -410,35 +439,37 @@ app.post("/delete/:id", async (req, res) => {
   const userEmail = req.session.userEmail; // Get the logged-in user's email
 
   try {
-      const result = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
-      const post = result.rows[0];
+    const result = await db.query("SELECT * FROM posts WHERE id = $1", [id]);
+    const post = result.rows[0];
 
-      if (post) {
-        if (post.user_email === userEmail) { // Check if the post belongs to the logged-in user
-          if (fs.existsSync(path.join(__dirname, "public", post.image_url))) {
-            fs.unlinkSync(path.join(__dirname, "public", post.image_url)); // Delete the image file
-          }
-          await db.query("DELETE FROM posts WHERE id = $1", [id]); // Delete the post from the database
-          res.redirect("/pro");
-        } else {
-          res.status(403).send("You can only delete your own posts");
+    if (post) {
+      if (post.user_email === userEmail) {
+        // Check if the post belongs to the logged-in user
+        if (fs.existsSync(path.join(__dirname, "public", post.image_url))) {
+          fs.unlinkSync(path.join(__dirname, "public", post.image_url)); // Delete the image file
         }
-         
+        await db.query("DELETE FROM posts WHERE id = $1", [id]); // Delete the post from the database
+        res.redirect("/pro");
       } else {
-          res.status(404).send("Post not found");
+        res.status(403).send("You can only delete your own posts");
       }
+    } else {
+      res.status(404).send("Post not found");
+    }
   } catch (err) {
-      console.error("Error deleting post:", err);
-      res.status(500).send("Error deleting post");
+    console.error("Error deleting post:", err);
+    res.status(500).send("Error deleting post");
   }
 });
 
 // Route to view profile (Display user profile information)
 app.get("/up", async (req, res) => {
-  const userEmail = req.session.userEmail ; // Assuming the user's email is stored in session after login
-  
+  const userEmail = req.session.userEmail; // Assuming the user's email is stored in session after login
+
   try {
-    const result = await db.query("SELECT * FROM userinfo WHERE email = $1", [userEmail]);
+    const result = await db.query("SELECT * FROM userinfo WHERE email = $1", [
+      userEmail,
+    ]);
     if (result.rows.length > 0) {
       const userProfile = result.rows[0];
       res.render("up.ejs", { userProfile });
@@ -454,9 +485,11 @@ app.get("/up", async (req, res) => {
 // Route to edit profile (display the form with current profile data)
 app.get("/edit-profile", async (req, res) => {
   const userEmail = req.session.userEmail;
-  
+
   try {
-    const result = await db.query("SELECT * FROM userinfo WHERE email = $1", [userEmail]);
+    const result = await db.query("SELECT * FROM userinfo WHERE email = $1", [
+      userEmail,
+    ]);
     if (result.rows.length > 0) {
       const userProfile = result.rows[0];
       res.render("editProfile.ejs", { userProfile });
@@ -495,7 +528,8 @@ app.use((req, res, next) => {
 // Search Route
 app.get("/search", async (req, res) => {
   const searchQuery = req.query.q; // Get the search query from the request
-  const userRole = 'user'; // Assuming a default user role for this example
+  const userRole = req.session.userEmail ? "user" : "guest";
+  const userEmail = req.session.userEmail || "";
 
   try {
     // Query the database for posts matching the title or content
@@ -504,15 +538,62 @@ app.get("/search", async (req, res) => {
       [`%${searchQuery}%`]
     );
     const posts = result.rows;
-    res.render("pro.ejs", { posts, userRole });
+    res.render("pro.ejs", { posts, userRole, userEmail, searchQuery });
   } catch (err) {
     console.error("Error executing search query:", err);
     res.status(500).send("Error executing search query");
   }
 });
 
+// API endpoint to get user's products
+app.get("/api/user-products", async (req, res) => {
+  const userEmail = req.session.userEmail;
+
+  if (!userEmail) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+
+  try {
+    const result = await db.query(
+      "SELECT * FROM posts WHERE user_email = $1 ORDER BY created_at DESC",
+      [userEmail]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching user products:", err);
+    res.status(500).json({ error: "Error fetching user products" });
+  }
+});
+
+// API endpoint to get user stats
+app.get("/api/user-stats", async (req, res) => {
+  const userEmail = req.session.userEmail;
+
+  if (!userEmail) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+
+  try {
+    // Get total products listed
+    const productsResult = await db.query(
+      "SELECT COUNT(*) as total FROM posts WHERE user_email = $1",
+      [userEmail]
+    );
+
+    // For now, sold products and reviews are 0 since we don't have those tables yet
+    // You can add a 'status' column to posts table and a reviews table later
+
+    res.json({
+      productsListed: parseInt(productsResult.rows[0].total) || 0,
+      productsSold: 0, // Will be implemented when status column is added
+      reviews: 0, // Will be implemented when reviews table is added
+    });
+  } catch (err) {
+    console.error("Error fetching user stats:", err);
+    res.status(500).json({ error: "Error fetching user stats" });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-

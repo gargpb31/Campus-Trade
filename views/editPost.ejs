@@ -1,144 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Post</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        body {
-            background-color:white;
-            color: rgb(59, 10, 69);
-            font-family: Arial, sans-serif;
-            background-image: url("/campus2.jpg"); /* Add your image URL here */
-            background-size: cover;
-            background-attachment: fixed;
-        }
-
-        h2 {
-            color: rgb(59, 10, 69);
-            text-align: center;
-            margin-top: 30px;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        main {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for the background */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            display: block;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="number"],
-        textarea,
-        input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 2px solid rgb(59, 10, 69);
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        button {
-            background-color: rgb(59, 10, 69);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: darkmagenta;
-        }
-
-        .current-image {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .current-image img {
-            width: 200px;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        footer {
-            background-color: rgb(59, 10, 69);
-            color: white;
-            text-align: center;
-            padding: 15px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Product - Campus Trade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <h2>Edit Product</h2>
-        <form action="/edit/<%= post.id %>" method="POST" enctype="multipart/form-data">
-            <!-- Product Title -->
-            <label for="title">Product Name:</label>
-            <input type="text" id="title" name="title" value="<%= post.title %>" required>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <i class="fas fa-store"></i>
+          Campus Trade
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="/pro" class="nav-link">Browse Products</a></li>
+            <li><a href="/create" class="nav-link">Add Product</a></li>
+            <li><a href="/up" class="nav-link">My Profile</a></li>
+            <li><a href="/" class="nav-link btn btn-outline">Sign Out</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-            <!-- Product Description -->
-            <label for="content">Description:</label>
-            <textarea id="content" name="content" required><%= post.content %></textarea>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="edit-product-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1><i class="fas fa-edit"></i> Edit Product</h1>
+          <p>Update your product information and image</p>
+        </div>
 
-            <!-- Mobile Number -->
-            <label for="mobile">Mobile Number:</label>
-            <input type="tel" id="mobile" name="mobile" value="<%= post.mobile_number %>" required pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number">
-
-            <!-- Email -->
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<%= post.email_address %>" required placeholder="Enter your email address">
-
-            <!-- Expected Amount -->
-            <label for="amount">Expected Amount:</label>
-            <input type="number" id="amount" name="amount" value="<%= post.expected_amount %>" required min="0" placeholder="Enter expected amount">
-
-            <!-- Display current image if exists -->
-            <% if (post.imageUrl) { %>
-                <div class="current-image">
-                    <p>Current Image:</p>
-                    <img src="<%= post.imageUrl %>" alt="<%= post.title %>">
+        <!-- Edit Product Form -->
+        <div class="form-container">
+          <div class="form-card">
+            <form action="/edit/<%= post.id %>" method="POST" enctype="multipart/form-data" id="editProductForm">
+              <!-- Product Details Section -->
+              <div class="form-section">
+                <div class="section-header">
+                  <i class="fas fa-box"></i>
+                  <h3>Product Details</h3>
                 </div>
-            <% } %>
+                
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="title" class="form-label">Product Name</label>
+                    <input type="text" id="title" name="title" class="form-control" value="<%= post.title %>" required placeholder="Enter product name">
+                  </div>
 
-            <!-- Upload new image -->
-            <label for="image">Replace Image (optional):</label>
-            <input type="file" id="image" name="image">
+                  <div class="form-group">
+                    <label for="amount" class="form-label">Expected Amount (₹)</label>
+                    <input type="number" id="amount" name="amount" class="form-control" value="<%= post.expected_amount %>" required min="0" placeholder="Enter expected amount">
+                  </div>
+                </div>
 
-            <!-- Submit Button -->
-            <button type="submit">Save Changes</button>
-        </form>
-    </main>
+                <div class="form-group">
+                  <label for="content" class="form-label">Description</label>
+                  <textarea id="content" name="content" class="form-control" required placeholder="Describe your product in detail"><%= post.content %></textarea>
+                  <p class="form-text">Provide a detailed description of your product's condition, features, and any additional information.</p>
+                </div>
+              </div>
 
-    <footer>
-        <p>&copy; Campus Bazaar</p>
-    </footer>
+              <!-- Contact Information Section -->
+              <div class="form-section">
+                <div class="section-header">
+                  <i class="fas fa-phone"></i>
+                  <h3>Contact Information</h3>
+                </div>
+                
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="mobile" class="form-label">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" class="form-control" value="<%= post.mobile_number %>" required pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" value="<%= post.email_address %>" required placeholder="Enter your email address">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Product Image Section -->
+              <div class="form-section">
+                <div class="section-header">
+                  <i class="fas fa-image"></i>
+                  <h3>Product Image</h3>
+                </div>
+                
+                <!-- Current Image Display -->
+                <% if (post.imageUrl) { %>
+                  <div class="current-image-container">
+                    <label class="form-label">Current Image</label>
+                    <div class="current-image">
+                      <img src="<%= post.imageUrl %>" alt="<%= post.title %>" id="currentImage">
+                      <div class="image-overlay">
+                        <span>Current Image</span>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
+
+                <!-- New Image Upload -->
+                <div class="image-upload-container">
+                  <label for="image" class="file-upload-label">
+                    <i class="fas fa-upload"></i>
+                    <span><%= post.imageUrl ? 'Replace Image' : 'Upload Image' %></span>
+                  </label>
+                  <input type="file" id="image" name="image" accept="image/*" class="file-input">
+                  <p class="form-text">Upload a clear image of your product (JPG, PNG, max 5MB)</p>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                  <label class="form-label">New Image Preview</label>
+                  <div class="preview-container">
+                    <img id="previewImg" alt="Preview">
+                    <button type="button" class="remove-image" onclick="removeImage()">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Actions -->
+              <div class="form-actions">
+                <a href="/pro" class="btn btn-outline">
+                  <i class="fas fa-arrow-left"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i> Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Campus Trade</h3>
+          <p>Your trusted marketplace for campus commerce.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="/pro">Browse Products</a>
+          <a href="/create">Add Product</a>
+          <a href="/features">Features</a>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: support@campustrade.com</p>
+          <p>Phone: +91 1234567890</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Campus Trade. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    .edit-product-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      color: var(--text-primary);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .page-header h1 i {
+      color: var(--primary-color);
+    }
+
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+    }
+
+    .form-container {
+      margin-bottom: 2rem;
+    }
+
+    .form-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      padding: 2.5rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .form-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .section-header i {
+      color: var(--primary-color);
+      font-size: 1.25rem;
+    }
+
+    .section-header h3 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .current-image-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .current-image {
+      position: relative;
+      display: inline-block;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .current-image img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    .image-upload-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .file-upload-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary-color);
+      color: white;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .file-upload-label:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .image-preview {
+      margin-top: 1rem;
+    }
+
+    .preview-container {
+      position: relative;
+      display: inline-block;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .preview-container img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .remove-image {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .remove-image:hover {
+      background: var(--danger-dark);
+      transform: scale(1.1);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .form-card {
+        padding: 1.5rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .form-actions .btn {
+        width: 100%;
+      }
+
+      .current-image img,
+      .preview-container img {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+
+  <script>
+    // Image preview functionality
+    document.getElementById('image').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('previewImg').src = e.target.result;
+          document.getElementById('imagePreview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Remove image preview
+    function removeImage() {
+      document.getElementById('image').value = '';
+      document.getElementById('imagePreview').style.display = 'none';
+    }
+
+    // Form validation
+    document.getElementById('editProductForm').addEventListener('submit', function(e) {
+      const title = document.getElementById('title').value.trim();
+      const content = document.getElementById('content').value.trim();
+      const mobile = document.getElementById('mobile').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const amount = document.getElementById('amount').value;
+
+      // Clear previous errors
+      clearErrors();
+
+      let hasErrors = false;
+
+      if (title.length < 3) {
+        showError('title', 'Product name must be at least 3 characters long');
+        hasErrors = true;
+      }
+
+      if (content.length < 10) {
+        showError('content', 'Description must be at least 10 characters long');
+        hasErrors = true;
+      }
+
+      if (!/^\d{10}$/.test(mobile)) {
+        showError('mobile', 'Mobile number must be exactly 10 digits');
+        hasErrors = true;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('email', 'Please enter a valid email address');
+        hasErrors = true;
+      }
+
+      if (amount <= 0) {
+        showError('amount', 'Amount must be greater than 0');
+        hasErrors = true;
+      }
+
+      if (hasErrors) {
+        e.preventDefault();
+      }
+    });
+
+    function showError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'form-error';
+      errorDiv.textContent = message;
+      field.parentNode.appendChild(errorDiv);
+      field.classList.add('error');
+    }
+
+    function clearErrors() {
+      document.querySelectorAll('.form-error').forEach(error => error.remove());
+      document.querySelectorAll('.form-control.error').forEach(field => field.classList.remove('error'));
+    }
+  </script>
 </body>
 </html>

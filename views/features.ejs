@@ -2,121 +2,292 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Features - College Marketplace</title>
-  <style>
-    /* Basic page styling */
-    body {
-      font-family: Arial, sans-serif;
-      color: #000;
-      background-image: url('/campus2.jpg'); /* Replace with the path to your image */
-      background-size: cover;
-      background-position: center;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Header styling */
-    header {
-      background-color: rgb(59, 10, 69); /* Updated header color */
-      padding: 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      color: #fff;
-      font-size: 36px;
-      margin: 0;
-      letter-spacing: 1px;
-    }
-
-    /* Main section styling */
-    main {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      background-color: #fff;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-
-    section {
-      margin-bottom: 20px;
-    }
-
-    section h2 {
-      color: rgb(59, 10, 69);
-      font-size: 24px;
-      margin-bottom: 10px;
-      border-bottom: 2px solid #000;
-      padding-bottom: 5px;
-    }
-
-    section p {
-      color: #333;
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    /* Feature box styling */
-    section {
-      border-left: 5px solid rgb(59, 10, 69);
-      padding: 15px;
-      background-color: #fafafa;
-      border-radius: 5px;
-      transition: transform 0.2s;
-    }
-
-    section:hover {
-      transform: translateY(-5px);
-      background-color: #fff;
-    }
-    
-    /* Footer */
-    footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 14px;
-      color: #666;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features - Campus Trade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Features</h1>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <i class="fas fa-store"></i>
+          Campus Trade
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/pro" class="nav-link">Browse Products</a></li>
+            <li><a href="/about" class="nav-link">About</a></li>
+            <li><a href="/login" class="nav-link btn btn-primary">Sign In</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
-  <main>
-    <section>
-      <h2>Secure College Marketplace</h2>
-      <p>College students can buy and sell items securely within the campus community. Only verified users with a college email can access and post listings.</p>
-    </section>
 
-    <section>
-      <h2>Profile and Authentication</h2>
-      <p>Create a unique profile where you can manage and update personal information, making it easier to connect and interact with fellow students.</p>
-    </section>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="features-hero">
+        <div class="hero-content">
+          <h1>Platform Features</h1>
+          <p>Discover what makes Campus Trade the perfect marketplace for students</p>
+        </div>
+      </div>
 
-    <section>
-      <h2>Post and Edit Listings</h2>
-      <p>Upload items for sale with photos, descriptions, and prices. You can also edit or delete your listings at any time.</p>
-    </section>
+      <!-- Features Grid -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Secure Campus Marketplace</h3>
+          <p>College students can buy and sell items securely within the campus community. Only verified users with a college email can access and post listings.</p>
+        </div>
 
-    <section>
-      <h2>Search and Filter</h2>
-      <p>Find exactly what you're looking for with our robust search functionality. Search by keywords or categories to easily locate specific items.</p>
-    </section>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <h3>Profile & Authentication</h3>
+          <p>Create a unique profile where you can manage and update personal information, making it easier to connect and interact with fellow students.</p>
+        </div>
 
-    <section>
-      <h2>Forgot Password and OTP Security</h2>
-      <p>Forget your password? No problem. Reset your password with a secure OTP sent directly to your email for safe access.</p>
-    </section>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-edit"></i>
+          </div>
+          <h3>Post & Edit Listings</h3>
+          <p>Upload items for sale with photos, descriptions, and prices. You can also edit or delete your listings at any time.</p>
+        </div>
 
-    <section>
-      <h2>Email Notifications</h2>
-      <p>Receive notifications and updates about new items, messages, and interactions on the platform, directly to your inbox.</p>
-    </section>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Search & Filter</h3>
+          <p>Find exactly what you're looking for with our robust search functionality. Search by keywords or categories to easily locate specific items.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-key"></i>
+          </div>
+          <h3>Secure Password Reset</h3>
+          <p>Forget your password? No problem. Reset your password with a secure OTP sent directly to your email for safe access.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h3>Email Notifications</h3>
+          <p>Receive notifications and updates about new items, messages, and interactions on the platform, directly to your inbox.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>Mobile Responsive</h3>
+          <p>Access Campus Trade from any device with our fully responsive design. Browse, buy, and sell on your phone, tablet, or computer.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Analytics Dashboard</h3>
+          <p>Track your selling performance with detailed analytics. Monitor views, sales, and engagement with your listings.</p>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="features-cta">
+        <div class="cta-content">
+          <h2>Ready to Start Trading?</h2>
+          <p>Join thousands of students who are already buying and selling on Campus Trade</p>
+          <div class="cta-buttons">
+            <a href="/register" class="btn btn-primary btn-lg">
+              <i class="fas fa-user-plus"></i> Sign Up Now
+            </a>
+            <a href="/pro" class="btn btn-outline btn-lg">
+              <i class="fas fa-eye"></i> Browse Products
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
-  <footer>
-    © 2024 College Marketplace. All rights reserved.
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Campus Trade</h3>
+          <p>Your trusted marketplace for campus commerce.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="/pro">Browse Products</a>
+          <a href="/create">Add Product</a>
+          <a href="/features">Features</a>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: support@campustrade.com</p>
+          <p>Phone: +91 1234567890</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Campus Trade. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
+
+  <style>
+    .features-hero {
+      text-align: center;
+      padding: 4rem 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: var(--radius-xl);
+      margin-bottom: 3rem;
+      color: white;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .feature-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-color);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .feature-card h3 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .features-cta {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .cta-content h2 {
+      color: var(--text-primary);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-content p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .feature-card {
+        padding: 2rem;
+      }
+
+      .cta-content h2 {
+        font-size: 2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
 </body>
 </html>

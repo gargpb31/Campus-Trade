@@ -2,189 +2,403 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Us - College Marketplace</title>
-  <style>
-    /* Basic page styling */
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      font-family: Arial, sans-serif;
-      background-image: url('/campus2.jpg'); /* Replace with the path to your image */
-      background-size: cover;
-      color: rgb(59, 10, 69);
-    }
-
-    main {
-      flex-grow: 1;
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      background-color: #fff;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-
-    footer {
-      background-color: rgb(59, 10, 69);
-      color: white;
-      padding: 10px 0;
-      font-size: 0.9em;
-      text-align: center;
-    }
-
-    /* Header styling */
-    header {
-      background-color: rgb(59, 10, 69);
-      padding: 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      color: #fff;
-      font-size: 36px;
-      margin: 0;
-      letter-spacing: 1px;
-    }
-
-    .section {
-      margin-bottom: 20px;
-      border-left: 5px solid rgb(59, 10, 69);
-      padding: 15px;
-      background-color: #fafafa;
-      border-radius: 5px;
-      transition: transform 0.2s;
-      display: flex;
-      align-items: center;
-    }
-
-    .section:hover {
-      transform: translateY(-5px);
-      background-color: #fff;
-    }
-
-    .section h2 {
-      color: rgb(59, 10, 69);
-      font-size: 24px;
-      margin: 0 0 10px;
-    }
-
-    .section p {
-      color: #333;
-      line-height: 1.6;
-      font-size: 16px;
-      margin: 0;
-    }
-
-    .section-icon {
-      font-size: 36px;
-      margin-right: 20px;
-      color: rgb(59, 10, 69);
-    }
-
-    /* Team table styling */
-    .team-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    .team-table th, .team-table td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .team-table th {
-      background-color: rgb(59, 10, 69);
-      color: white;
-    }
-
-    .team-table td {
-      color: #333;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Campus Trade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>About Us</h1>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <i class="fas fa-store"></i>
+          Campus Trade
+        </a>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/pro" class="nav-link">Browse Products</a></li>
+            <li><a href="/features" class="nav-link">Features</a></li>
+            <li><a href="/login" class="nav-link btn btn-primary">Sign In</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </header>
-  <main>
-    <div class="section">
-      <div class="section-icon">🎯</div>
-      <div>
-        <h2>Our Mission</h2>
-        <p>To create a secure and trustworthy platform for college students to connect and trade within their campus community.</p>
-      </div>
-    </div>
 
-    <div class="section">
-      <div class="section-icon">🌟</div>
-      <div>
-        <h2>What We Offer</h2>
-        <p>An intuitive marketplace designed by students for students, allowing easy trading within campus with verified security.</p>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="about-hero">
+        <div class="hero-content">
+          <h1>About Campus Trade</h1>
+          <p>Building the future of campus commerce, one transaction at a time</p>
+        </div>
       </div>
-    </div>
 
-    <div class="section">
-      <div class="section-icon">🔮</div>
-      <div>
-        <h2>Our Vision</h2>
-        <p>'To become the most accessible resource for every student's campus needs, fostering a supportive marketplace.'</p>
+      <!-- Mission Section -->
+      <div class="about-section">
+        <div class="section-card">
+          <div class="section-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <div class="section-content">
+            <h2>Our Mission</h2>
+            <p>To create a secure and trustworthy platform for college students to connect and trade within their campus community. We believe in fostering meaningful connections while providing a safe environment for commerce.</p>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="section">
-      <div class="section-icon">👥</div>
-      <div>
-        <h2>Meet the Team</h2>
-        <p>A team of dedicated students using technical expertise to create a community-driven marketplace.</p>
-        <table class="team-table">
-          <tr>
-            <th>Name</th>
-            <th>Enrollment Number</th>
-            <th>Role</th>
-          </tr>
-          <tr>
-            <td>Sunny Garg</td>
-            <td>IIT2023108</td>
-            <td>Full Stack Developer</td>
-          </tr>
-          <tr>
-            <td>Divyansh Aggarwal</td>
-            <td>IIT2023111</td>
-            <td>Front End Developer</td>
-          </tr>
-          <tr>
-            <td>Shraddha Srivastava</td>
-            <td>IIT2023114</td>
-            <td>Backend Developer</td>
-          </tr>
-          <tr>
-            <td>Hardik Batra</td>
-            <td>IIT2023115</td>
-            <td>Backend Developer</td>
-          </tr>
-          <tr>
-            <td>Nitya Jangra</td>
-            <td>IIT2023116</td>
-            <td>Designer</td>
-          </tr>
-          <tr>
-            <td>Kavya Mitruka</td>
-            <td>IIT2023199</td>
-            <td>Designer</td>
-          </tr>
-        </table>
+      <!-- What We Offer Section -->
+      <div class="about-section">
+        <div class="section-card">
+          <div class="section-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="section-content">
+            <h2>What We Offer</h2>
+            <p>An intuitive marketplace designed by students for students, allowing easy trading within campus with verified security. Our platform prioritizes user experience, safety, and community building.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vision Section -->
+      <div class="about-section">
+        <div class="section-card">
+          <div class="section-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <div class="section-content">
+            <h2>Our Vision</h2>
+            <p>To become the most accessible resource for every student's campus needs, fostering a supportive marketplace that connects students across different departments and years.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Section -->
+      <div class="about-section">
+        <div class="section-card team-card">
+          <div class="section-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="section-content">
+            <h2>Meet the Team</h2>
+            <p>A dedicated team of students using technical expertise to create a community-driven marketplace.</p>
+            
+            <div class="team-member">
+              <div class="member-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="member-info">
+                <h3>Sunny Garg</h3>
+                <p class="member-title">Competitive Programmer & Full-Stack Developer</p>
+                <p class="member-description">Passionate problem-solver with 1200+ DSA problems conquered. Skilled in building dynamic, efficient web applications with React, Next.js, and Node.js. I thrive on turning complex challenges into elegant, real-world solutions.</p>
+                <div class="member-links">
+                  <a href="https://portfolio-sunny-gargs-projects.vercel.app/" target="_blank" class="btn btn-outline btn-sm">
+                    <i class="fas fa-globe"></i> Portfolio
+                  </a>
+                  <a href="https://www.linkedin.com/in/gargpb31/" target="_blank" class="btn btn-outline btn-sm">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-number">1000+</div>
+            <div class="stat-label">Active Students</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Products Listed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div class="stat-number">200+</div>
+            <div class="stat-label">Successful Trades</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="stat-number">4.8</div>
+            <div class="stat-label">User Rating</div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
-  <footer>
-    © 2024 College Marketplace. All rights reserved.
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Campus Trade</h3>
+          <p>Your trusted marketplace for campus commerce.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="/pro">Browse Products</a>
+          <a href="/create">Add Product</a>
+          <a href="/features">Features</a>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: support@campustrade.com</p>
+          <p>Phone: +91 1234567890</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Campus Trade. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
+
+  <style>
+    .about-hero {
+      text-align: center;
+      padding: 4rem 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: var(--radius-xl);
+      margin-bottom: 3rem;
+      color: white;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .about-section {
+      margin-bottom: 3rem;
+    }
+
+    .section-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .section-icon {
+      flex-shrink: 0;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .section-content h2 {
+      color: var(--text-primary);
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-content p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .team-member {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-top: 2rem;
+      padding: 2rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .member-avatar {
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .member-info h3 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .member-title {
+      color: var(--primary-color);
+      font-weight: 500;
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+    }
+
+    .member-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .member-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stats-section {
+      margin-top: 4rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .section-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .section-icon {
+        margin: 0 auto;
+      }
+
+      .team-member {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+      }
+
+      .member-avatar {
+        margin: 0 auto;
+      }
+
+      .member-links {
+        justify-content: center;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .stat-card {
+        padding: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </body>
 </html>

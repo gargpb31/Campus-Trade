@@ -1,57 +1,237 @@
-
-<%- include('partials/header') %>
-
-<div class="container mt-5">
-  <h1 style="color: rgb(59, 10, 69); text-align: center; font-weight: bold;">Login</h1>
-
-  <div class="row justify-content-center">
-    <div class="col-sm-8">
-      <div class="card" style="background-color: white; border: 2px solid rgb(59, 10, 69);">
-        <div class="card-body" style="color: rgb(59, 10, 69);">
-            <!-- Alert for displaying messages -->
-          <% if (typeof message !== 'undefined') { %>
-            <div class="alert alert-danger text-center" role="alert">
-              <%= message %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Campus Trade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Trade
+                </a>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="/features" class="nav-link">Features</a></li>
+                        <li><a href="/about" class="nav-link">About</a></li>
+                        <li><a href="/register" class="nav-link btn btn-primary">Sign Up</a></li>
+                    </ul>
+                </nav>
             </div>
-          <% } %>
-          <form action="/login" method="POST">
-            <div class="form-group mb-3">
-              <label for="email" style="color: rgb(59, 10, 69);">Email</label>
-              <input type="email" class="form-control" name="username" id="email" 
-                     placeholder="Enter your email" required 
-                     aria-label="Email" 
-                     style="background-color: white; color: rgb(59, 10, 69); border: 1px solid rgb(59, 10, 69);">
-            </div>
-            <div class="form-group mb-4">
-              <label for="password" style="color: rgb(59, 10, 69);">Password</label>
-              <input type="password" class="form-control" name="password" id="password" 
-                     placeholder="Enter your password" required 
-                     aria-label="Password" 
-                     style="background-color: white; color: rgb(59, 10, 69); border: 1px solid rgb(59, 10, 69);">
-            </div>
-            <button type="submit" class="btn" 
-                    style="background-color: rgb(111, 6, 132); color: white; font-weight: bold; width: 100%;">Login</button>
-          </form>
-             <div class="text-center mt-3">
-            <a href="/fp" style="color: rgb(59, 10, 69); font-weight: bold; text-decoration: underline;">
-              Forgot Password?
-            </a>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </header>
 
-<style>
-  body {
-    background-image: url("campus2.jpg"); 
-     background-size: cover;
-   
-  }
-</style>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>Welcome Back</h1>
+                        <p>Sign in to your Campus Trade account</p>
+                    </div>
 
+                    <% if (typeof message !== 'undefined' && message) { %>
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <%= message %>
+                        </div>
+                    <% } %>
 
-<%- include('partials/footer') %>
+                    <form action="/login" method="POST" class="auth-form">
+                        <div class="form-group">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-envelope"></i> Email Address
+                            </label>
+                            <input type="email" id="username" name="username" class="form-control" 
+                                   placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock"></i> Password
+                            </label>
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" class="form-control" 
+                                       placeholder="Enter your password" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword()">
+                                    <i class="fas fa-eye" id="passwordIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg w-full">
+                                <i class="fas fa-sign-in-alt"></i> Sign In
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="/register" class="text-primary">Sign up here</a></p>
+                        <p><a href="/fp" class="text-secondary">Forgot your password?</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Campus Trade</h3>
+                    <p>Your trusted marketplace for campus commerce.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="/features">Features</a>
+                    <a href="/about">About Us</a>
+                    <a href="/register">Sign Up</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: support@campustrade.com</p>
+                    <p>Phone: +91 1234567890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Campus Trade. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .auth-container {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .auth-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            padding: 3rem;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .auth-form {
+            margin-bottom: 2rem;
+        }
+
+        .password-input {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .password-toggle:hover {
+            color: var(--text-secondary);
+        }
+
+        .auth-footer {
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .auth-footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-footer a {
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .text-primary {
+            color: var(--primary-color);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordIcon = document.getElementById('passwordIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Add loading state to form
+        document.querySelector('.auth-form').addEventListener('submit', function() {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<span class="loading"></span> Signing In...';
+            submitBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>
 
 
