@@ -1,7 +1,5 @@
 # 🏪 Campus Trade - Student Marketplace Platform
 
-
-
 ## 🎯 Overview
 
 **Campus Trade** is a modern, full-stack web application designed as a **peer-to-peer marketplace** for students. It enables students to buy, sell, and exchange items like books, electronics, accessories, and more within their campus community. The platform provides a secure, user-friendly interface with robust features for managing listings, user profiles, and transactions.
